@@ -1,8 +1,6 @@
 // # vim: set shiftwidth=2 tabstop=2 softtabstop=2 expandtab:
 
-module.exports = function(game, opts) {
-  return new Modal(game, opts);
-};
+module.exports = Modal;
 
 function Modal(game, opts) 
 {
@@ -20,7 +18,7 @@ Modal.prototype.open = function() {
   var self = this;
   this.game.interact.on('attain', function() {
     // clicked game, beyond dialog
-    this.close();
+    self.close();
   });
 
   this.element.style.visibility = '';
@@ -37,7 +35,7 @@ Modal.prototype.close = function() {
 
 Modal.prototype.toggle = function() {
   if (this.isOpen)
-    this.open();
-  else
     this.close();
+  else
+    this.open();
 };
