@@ -6,9 +6,12 @@ module.exports = function(game, opts) {
 
 function Modal(game, opts) 
 {
+  this.game = game;
+
   opts = opts || {};
   this.element = opts.element || (function(){ throw "voxel-modal requires 'element' option" })();
-  this.game = game;
+
+  this.isOpen = false;
 }
 
 Modal.prototype.open = function() {
@@ -21,10 +24,20 @@ Modal.prototype.open = function() {
   });
 
   this.element.style.visibility = '';
+  this.isOpen = true;
 };
 
 Modal.prototype.close = function() {
   this.element.style.visibility = 'hidden';
 
   //this.game.interact.request(); // TODO: only request if don't have, or catch error?
+
+  this.isOpen = false;
+};
+
+Modal.prototype.toggle = function() {
+  if (this.isOpen)
+    this.open();
+  else
+    this.close();
 };
