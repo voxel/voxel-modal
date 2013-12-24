@@ -1,10 +1,10 @@
 {
-    "name": "voxel-dialog",
-    "description": "modal dialogs for voxel.js",
+    "name": "voxel-modal",
+    "description": "modal elements blocking interaction (voxel.js addon)",
     "version": "0.0.1",
     "repository": {
         "type": "git",
-        "url": "git@github.com:deathcap/voxel-dialog.git"
+        "url": "git@github.com:deathcap/voxel-modal.git"
     },
     "dependencies": {
     },

@@ -1,17 +1,17 @@
 // # vim: set shiftwidth=2 tabstop=2 softtabstop=2 expandtab:
 
 module.exports = function(game, opts) {
-  return new Dialog(game, opts);
+  return new Modal(game, opts);
 };
 
-function Dialog(game, opts) 
+function Modal(game, opts) 
 {
   opts = opts || {};
-  this.div = opts.div || (function(){ throw "voxel-dialog requires 'div' option" })();
+  this.element = opts.element || (function(){ throw "voxel-modal requires 'element' option" })();
   this.game = game;
 }
 
-Dialog.prototype.open = function() {
+Modal.prototype.open = function() {
   this.game.interact.release();
 
   var self = this;
@@ -20,11 +20,11 @@ Dialog.prototype.open = function() {
     this.close();
   });
 
-  this.div.style.visibility = '';
+  this.element.style.visibility = '';
 };
 
-Dialog.prototype.close = function() {
-  this.div.style.visibility = 'hidden';
+Modal.prototype.close = function() {
+  this.element.style.visibility = 'hidden';
 
   //this.game.interact.request(); // TODO: only request if don't have, or catch error?
 };
