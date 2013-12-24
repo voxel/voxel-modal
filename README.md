@@ -1,0 +1,6 @@
+# voxel-dialog
+
+## License
+
+MIT
+
