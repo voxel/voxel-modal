@@ -11,7 +11,7 @@ Pass to the constructor (game, opts), where `game` is the voxel-engine instance,
 
 elements: your DOM element to hide/show content, should start hidden (required)
 
-escapeKeys: array of key codes to close dialog, default [27] (Esc key)
+escapeKeys: array of key codes to close dialog, default \[27\] (Esc key)
 
 Call the `open()` method to open, `close()` to close. When "opened", the element is shown,
 game interaction is released; when closed, the element is hidden, and game interaction is
