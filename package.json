@@ -17,5 +17,8 @@
   "peerDependencies": {
     "voxel-engine": ">=0.20.0"
   },
+  "scripts": {
+    "start": "beefy demo.js:bundle.js"
+  },
   "license": "MIT"
 }
