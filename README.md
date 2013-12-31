@@ -17,6 +17,13 @@ Call the `open()` method to open, `close()` to close. When "opened", the element
 game interaction is released; when closed, the element is hidden, and game interaction is
 resumed. Clicking outside of the element or pressing an escape key will call `close()`.
 
+## Example
+
+Run `npm start` or visit [http://deathcap.github.io/voxel-modal](http://deathcap.github.io/voxel-modal).
+In this demo, try moving around in the game, then hit "B" (boss key) to open the modal element, then Escape
+or click outside to close it; notice how interaction (pointer lock, FPS keybindings) is released/attained
+appropriately.
+
 ## License
 
 MIT
