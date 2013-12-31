@@ -1,5 +1,3 @@
-// # vim: set shiftwidth=2 tabstop=2 softtabstop=2 expandtab:
-
 module.exports = Modal;
 
 var ever = require('ever');
