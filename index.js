@@ -7,7 +7,8 @@ function Modal(game, opts)
   this.game = game;
 
   opts = opts || {};
-  this.element = opts.element || (function(){ throw "voxel-modal requires 'element' option" })();
+  this.element = opts.element;
+  if (!this.element) throw 'voxel-modal requires "element" option';
   this.escapeKeys = opts.escapeKeys || [27];
 
   this.isOpen = false;
