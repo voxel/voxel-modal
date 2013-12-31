@@ -1,3 +1,6 @@
+/*jshint globalstrict: true*/
+'use strict';
+
 module.exports = Modal;
 
 var ever = require('ever');
