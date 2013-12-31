@@ -2,7 +2,7 @@
 
 Add elements to block game interaction when open (for voxel.js). 
 
-Useful for modal dialogs or other UI widgets.
+Useful for modal dialogs or other UI widgets. Used by [voxel-modal-dialog](https://github.com/deathcap/voxel-modal-dialog).
 
 ## Usage
 
