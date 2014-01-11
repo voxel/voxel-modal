@@ -12,7 +12,11 @@ function Modal(game, opts)
   opts = opts || {};
   this.element = opts.element;
   if (!this.element) throw 'voxel-modal requires "element" option';
-  this.escapeKeys = opts.escapeKeys || [27];
+
+  // shortcut to close:
+  // ` (backquote) -- NOT escape due to pointer-lock https://github.com/deathcap/voxel-modal/issues/1
+  // if you don't have "`", alternative is to click the game canvas (closes automatically on attain)
+  this.escapeKeys = opts.escapeKeys || [192]; 
 
   this.isOpen = false;
 }
