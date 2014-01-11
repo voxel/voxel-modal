@@ -35,6 +35,7 @@ Modal.prototype.open = function() {
   ever(document.body).on('keydown', this.onKeydown = function(ev) {
     if (self.escapeKeys.indexOf(ev.keyCode) !== -1) {
       self.close();
+      ev.preventDefault();
     }
   });
 
