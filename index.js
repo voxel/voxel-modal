@@ -11,7 +11,7 @@ function Modal(game, opts)
 
   opts = opts || {};
   this.element = opts.element;
-  if (!this.element) throw 'voxel-modal requires "element" option';
+  if (!this.element) throw new Error('voxel-modal requires "element" option');
 
   // shortcut to close:
   // ` (backquote) -- NOT escape due to pointer-lock https://github.com/deathcap/voxel-modal/issues/1
