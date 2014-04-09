@@ -24,13 +24,18 @@ function Modal(game, opts)
 Modal.prototype.open = function() {
   if (this.isOpen) return;
 
-  this.game.interact.release();
-
   var self = this;
-  this.game.interact.on('attain', this.onAttain = function() {
-    // clicked game, beyond dialog
-    self.close();
-  });
+
+  if (this.game.interact) {
+    this.game.interact.release();
+
+    this.game.interact.on('attain', this.onAttain = function() {
+      // clicked game, beyond dialog TODO: game-shell needs this, too!
+      self.close();
+    });
+  } else if (this.game.shell) {
+    this.game.shell.pointerLock = false;
+  }
 
   ever(document.body).on('keydown', this.onKeydown = function(ev) {
     if (self.escapeKeys.indexOf(ev.keyCode) !== -1) {
@@ -46,13 +51,17 @@ Modal.prototype.open = function() {
 Modal.prototype.close = function() {
   if (!this.isOpen) return;
 
-  this.game.interact.removeListener('attain', this.onAttain);
   ever(document.body).removeListener('keydown', this.onKeydown);
 
   this.element.style.visibility = 'hidden';
 
   // resume game interaction
-  this.game.interact.request();
+  if (this.game.interact) {
+    this.game.interact.removeListener('attain', this.onAttain);
+    this.game.interact.request();
+  } else if (this.game.shell) {
+    this.game.shell.pointerLock = true;
+  }
 
   this.isOpen = false;
 };
