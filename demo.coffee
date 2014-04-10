@@ -1,4 +1,4 @@
-Modal = require('./');
+Modal = require('./')
 
 class Boss extends Modal
   constructor: (@game, opts) ->
@@ -18,7 +18,7 @@ class Boss extends Modal
 
 game = require('voxel-hello-world')({mesher: require('voxel').meshers.greedy})
 
-boss = new Boss(game, {});
+boss = new Boss(game, {})
 
 window.addEventListener 'keydown', (ev) ->
   if ev.keyCode == 'B'.charCodeAt(0)    # press 'B' to open
