@@ -34,7 +34,24 @@ Modal.prototype.open = function() {
       self.close();
     });
   } else if (this.game.shell) {
+    // exit pointer lock so user can interact with the modal element
     this.game.shell.pointerLock = false;
+
+    // but re-"want" it so clicking the canvas (outside the modal) will
+    // activate pointer lock (misleading assignment; requires user interaction)
+    this.game.shell.pointerLock = true;
+
+    // when user successfully acquires pointer lock by clicking the game-shell
+    // canvas, get out of the way
+    // TODO: ask game-shell to emit an event for us, support non-WebKit vendor prefixes
+    var self = this;
+    ever(document).on('webkitpointerlockchange', self.onPointerLockChange = function() {
+      if (document.webkitPointerLockElement) {
+        // pointer lock was acquired - close ourselves, resume gameplay
+        self.close();
+        ever(document).removeListener('webkitpointerlockchange', self.onPointerLockChange); // can't seem to use .once with ever (TypeError document removeListener)
+      }
+    });
   }
 
   ever(document.body).on('keydown', this.onKeydown = function(ev) {
