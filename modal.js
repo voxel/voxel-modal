@@ -26,14 +26,7 @@ Modal.prototype.open = function() {
 
   var self = this;
 
-  if (this.game.interact) {
-    this.game.interact.release();
-
-    this.game.interact.on('attain', this.onAttain = function() {
-      // clicked game, beyond dialog TODO: game-shell needs this, too!
-      self.close();
-    });
-  } else if (this.game.shell) {
+  if (this.game.shell) {
     // exit pointer lock so user can interact with the modal element
     this.game.shell.pointerLock = false;
 
@@ -52,6 +45,15 @@ Modal.prototype.open = function() {
         ever(document).removeListener('webkitpointerlockchange', self.onPointerLockChange); // can't seem to use .once with ever (TypeError document removeListener)
       }
     });
+  } else if (this.game.interact) {
+    this.game.interact.release();
+
+    this.game.interact.on('attain', this.onAttain = function() {
+      // clicked game, beyond dialog TODO: game-shell needs this, too!
+      self.close();
+    });
+  } else {
+    throw new Error('voxel-modal requires game-shell or interact');
   }
 
   ever(document.body).on('keydown', this.onKeydown = function(ev) {
@@ -73,11 +75,11 @@ Modal.prototype.close = function() {
   this.element.style.visibility = 'hidden';
 
   // resume game interaction
-  if (this.game.interact) {
+  if (this.game.shell) {
+    this.game.shell.pointerLock = true;
+  } else if (this.game.interact) {
     this.game.interact.removeListener('attain', this.onAttain);
     this.game.interact.request();
-  } else if (this.game.shell) {
-    this.game.shell.pointerLock = true;
   }
 
   this.isOpen = false;
