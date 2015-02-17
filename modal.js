@@ -36,13 +36,27 @@ Modal.prototype.open = function() {
 
     // when user successfully acquires pointer lock by clicking the game-shell
     // canvas, get out of the way
-    // TODO: ask game-shell to emit an event for us, support non-WebKit vendor prefixes
+    // TODO: ask game-shell to emit an event for us
     var self = this;
-    ever(document).on('webkitpointerlockchange', self.onPointerLockChange = function() {
-      if (document.webkitPointerLockElement) {
+    ever(document).on('pointerlockchange', self.onPointerLockChange = function() {
+      if (document.pointerLockElement) {
         // pointer lock was acquired - close ourselves, resume gameplay
         self.close();
-        ever(document).removeListener('webkitpointerlockchange', self.onPointerLockChange); // can't seem to use .once with ever (TypeError document removeListener)
+        ever(document).removeListener('pointerlockchange', self.onPointerLockChange); // can't seem to use .once with ever (TypeError document removeListener)
+      }
+    });
+    // webkit prefix for older browsers (< Chrome 40)
+    ever(document).on('webkitpointerlockchange', self.onWKPointerLockChange = function() {
+      if (document.webkitPointerLockElement) {
+        self.close();
+        ever(document).removeListener('webkitpointerlockchange', self.onWKPointerLockChange);
+      }
+    });
+    // moz prefix for Firefox
+    ever(document).on('mozpointerlockchange', self.onMPointerLockChange = function() {
+      if (document.mozPointerLockElement) {
+        self.close();
+        ever(document).removeListener('mozpointerlockchange', self.onMPointerLockChange);
       }
     });
   } else if (this.game.interact) {
