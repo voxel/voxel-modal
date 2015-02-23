@@ -1,4 +1,4 @@
-Modal = require('./')
+Modal = require('../')
 
 class Boss extends Modal
   constructor: (@game, opts) ->
@@ -14,7 +14,7 @@ class Boss extends Modal
 
     opts.element = @cover
 
-    super game, opts
+    super @game, opts
 
 game = require('voxel-hello-world')({mesher: require('voxel').meshers.greedy})
 
