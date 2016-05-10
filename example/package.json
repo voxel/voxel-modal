@@ -1,0 +1,28 @@
+{
+  "name": "voxel-modal-example",
+  "description": "modal elements blocking game interaction (voxel.js addon)",
+  "version": "0.2.4",
+  "main": "demo.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:deathcap/voxel-modal.git"
+  },
+  "keywords": [
+    "voxel",
+    "modal",
+    "widget"
+  ],
+  "dependencies": {
+    "ever": "0.0.3",
+    "voxel": "0.3.1",
+    "voxel-hello-world": "0.6.0"
+  },
+  "scripts": {
+    "start": "beefy demo.js:bundle.js -- --debug"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "beefy": "^2.1.6",
+    "browserify": "^13.0.1"
+  }
+}
